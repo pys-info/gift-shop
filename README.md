@@ -18,7 +18,7 @@ In the BASE directory  create a file called ‘.env’\
 Make sure you don’t use quotations around strings.
 
 
-6.Migrate Database python manage.py migrate\
+6.Migrate Database python manage.py makemigrations and then migrate\
 7.Create Super User python manage.py createsuperuser\
 8.Finally Run The Project python manage.py runserver
 
