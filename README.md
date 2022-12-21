@@ -19,7 +19,6 @@ Make sure you don’t use quotations around strings.
 
 
 6.Migrate Database python manage.py migrate\
-7.python manage.py oscar_populate_countries\
-8.Create Super User python manage.py createsuperuser\
+7.Create Super User python manage.py createsuperuser\
 8.Finally Run The Project python manage.py runserver
 
