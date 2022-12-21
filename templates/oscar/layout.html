@@ -2,25 +2,16 @@
 {% load static %}
 
 {% block styles %}
-    <link rel="stylesheet" type="text/css" href="{% static "oscar/css/styles.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'oscar/css/styles.css' %}" />
 {% endblock %}
 
 {% block layout %}
     {# Top-horizontal bar with account, notifictions, dashboard links #}
-    {% include "oscar/partials/nav_accounts.html" %}
+    {% include "oscar/partials/top_section.html" %}
 
-    {# Site logo/title, mini-basket, browse dropdown and searchbox #}
-    <header class="header container">
-        <div class="page_inner">
-            <div class="row justify-content-between">
-                {% include "oscar/partials/brand.html" %}
-                {# Mini-basket wrapped in a block so some templates can now display it #}
-                {% block mini_basket %}{% include "oscar/partials/mini_basket.html" %}{% endblock %}
-            </div>
-        </div>
-        {% block navigation %}
-            {% include "oscar/partials/nav_primary.html" %}
-        {% endblock %}
+    <header class="header">
+        {% include "oscar/partials/header_section.html" %}
+
     </header>
 
     {# Main content of page - other layout templates may override this block #}
@@ -39,7 +30,10 @@
                     {% block subheader %}{% endblock subheader %}
 
                     {# Div exists for AJAX updates to entire content section #}
-                    <div id="content_inner">{% block content %}{% endblock %}</div>
+                    <div id="content_inner">
+                      {% block content %}
+                      {% endblock %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,9 +46,9 @@
 {% block scripts %}
     {{ block.super }}
     <!-- Twitter Bootstrap -->
-    <script src="{% static "oscar/js/bootstrap4/bootstrap.bundle.min.js" %}"></script>
+    <script src="{% static 'oscar/js/bootstrap4/bootstrap.bundle.min.js' %}"></script>
     <!-- Oscar -->
-    <script src="{% static "oscar/js/oscar/ui.js" %}"></script>
+    <script src="{% static 'oscar/js/oscar/ui.js' %}"></script>
 {% endblock %}
 
 {% block extrascripts %}
