@@ -1,6 +1,8 @@
 {% load i18n %}
 
-<form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search:search' %}">
-    <input class="form-control mr-sm-2" name="q" placeholder="Search" aria-label="Search">
-    <button class="btn btn btn-secondary my-2 my-sm-0" type="submit">{% trans "Search" %}</button>
-</form>
+<div class="header2-search">
+                        <form method="GET" action="{% url 'search:search' %}">
+                            <input type="text" name="q" placeholder="Search...">
+                            <button class="btn"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
