@@ -145,9 +145,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-STATICFILES_DIRS = (
-    normpath(join(BASE_DIR, "static")),
-)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = (
+#     normpath(join(BASE_DIR, "static")),
+# )
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -168,7 +169,7 @@ OSCAR_ORDER_STATUS_PIPELINE = {
 OSCAR_SHOP_NAME = "Gift Shop"
 OSCAR_SHOP_TAGLINE = ''
 
-OSCAR_HOMEPAGE = reverse_lazy('catalogue:index')
+OSCAR_HOMEPAGE = reverse_lazy('index')
 
 OSCAR_ACCOUNTS_REDIRECT_URL = 'customer:profile-view'
 
