@@ -1,3 +1,8 @@
+/* custom css /
+
+/ end custom css */
+.slick-slide{height: 78% !important;}
+
 @font-face {
   font-family: Modesty;
   src: url(../font/modesty/ModestyFreshStyle.ttf);
@@ -7806,7 +7811,7 @@ body.offcanvas-open .sticky-header {
   margin: 0;
 }
 .page-title-section {
-  padding: 130px 0;
+  padding: 50px 0;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px),
   only screen and (min-width: 768px) and (max-width: 991px) {
