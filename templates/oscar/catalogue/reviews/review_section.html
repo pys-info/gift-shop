@@ -1,0 +1,40 @@
+{% load history_tags %}
+{% load currency_filters %}
+{% load reviews_tags %}
+{% load product_tags %}
+{% load display_tags %}
+{% load i18n %}
+{% load purchase_info_tags %}
+{% block product_review %}
+        <section>
+            <div id="reviews" class="sub-header">
+                {% if product.num_approved_reviews > 3 %}
+                    <a href="{% url 'catalogue:reviews-list' product_slug=product.slug product_pk=product.id %}" class="btn float-right"><i class="fa fa-list fa-lg p-3" aria-hidden="true"> </i>{% trans "Tap to See all reviews." %}</a>
+                {% endif %}
+                <h2>{% trans "Customer Reviews" %}</h2>
+            </div>
+
+            {% if product.num_approved_reviews == 0 %}
+                <p>
+                    {% if product|is_review_permitted:user %}
+                        {% url 'catalogue:reviews-add' product_slug=product.slug product_pk=product.id as add_review_url %}
+                            {% blocktrans %}This product does not have any reviews yet -
+                            <a href="{{ add_review_url }}#addreview">be the first to write one</a>.
+                        {% endblocktrans %}
+                    {% else %}
+                        {% trans "This product does not have any reviews yet" %}.
+                    {% endif %}
+                </p>
+            {% else %}
+                <ol class="list-unstyled review-list">
+                    {% for review in product.reviews.approved.all|slice:":3" %}
+                        <li>
+                        {% include 'oscar/catalogue/partials/review.html' %}
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+        </section>
+        {% endblock product_review %}
+
+

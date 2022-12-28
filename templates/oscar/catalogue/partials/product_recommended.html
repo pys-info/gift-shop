@@ -1,0 +1,19 @@
+{% load i18n %}
+{% load product_tags %}
+{% load history_tags %}
+{% with recommended_products=product.sorted_recommended_products|slice:":6" %}
+        {% if recommended_products %}
+            <div class="sub-header">
+                <h2>{% trans "Recommended items" %}</h2>
+            </div>
+            <ul class="row list-unstyled mx-0">
+                {% for product in recommended_products %}
+                <li class="col-sm-4 col-md-3 col-lg-3">
+                    {% render_product product %}
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% recently_viewed_products current_product=product %}

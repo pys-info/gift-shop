@@ -1,6 +1,7 @@
 import os
 from os.path import normpath, join
 
+from django.contrib import messages
 from oscar.defaults import *
 from pathlib import Path
 import environ
@@ -149,7 +150,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = (
     normpath(join(BASE_DIR, "static")),
 )
-
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 HAYSTACK_CONNECTIONS = {
@@ -185,7 +189,7 @@ OSCAR_PRODUCTS_PER_PAGE = 10
 
 OSCAR_OFFERS_PER_PAGE = 2
 
-OSCAR_REVIEWS_PER_PAGE = 1
+OSCAR_REVIEWS_PER_PAGE = 5
 
 OSCAR_ORDER_STATUS_CASCADE = {
     'Being processed': 'In progress'
@@ -196,3 +200,12 @@ OSCAR_ALLOW_ANON_CHECKOUT = True
 OSCAR_SEND_REGISTRATION_EMAIL = False
 
 OSCAR_DEFAULT_CURRENCY = "INR"
+
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+}

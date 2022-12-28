@@ -9,7 +9,7 @@
 {% block body_class %}dashboard-login{% endblock %}
 
 {% block layout %}
-    <div class="card col-sm-4 mx-auto mt-5">
+    <div class="card col-sm-4 mx-auto mt-5 text-center" style="text-align:center; ">
         <div class="card-body">
         <form method="post" novalidate id="dashboard_login_form">
             <h1>{{ shop_name }}</h1>
@@ -21,11 +21,11 @@
         </div>
             {% endif %}
 
-            <div class="form-group">
+            <div class="form-group mt-5">
                 {{ form.username.label_tag }}
                 {% render_field form.username class="form-control" %}
             </div>
-            <div class="form-group">
+            <div class="form-group p-5">
                 {{ form.password.label_tag }}
                 {% render_field form.password class="form-control" %}
             </div>

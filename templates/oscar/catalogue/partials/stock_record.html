@@ -1,7 +1,18 @@
 {% load currency_filters %}
 {% load i18n %}
 {% load purchase_info_tags %}
+<style>
+  .price_color {
+    font-size: 2rem;
+    color: #28a745;
+    font-weight: bold; }
 
+    .availability.outofstock {
+  color: #dc3545; }
+
+.availability.instock {
+  color: #28a745; }
+</style>
 {% purchase_info_for_product request product as session %}
 
 {% if session.price.exists %}
