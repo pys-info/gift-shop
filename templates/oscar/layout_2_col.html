@@ -7,7 +7,7 @@ main content area to split it into a sidebar and a content block
 {% block content_wrapper %}
 <div class="{% block content_wrapper_classes %}container page{% endblock %}">
     <div class="page_inner">
-        {% block breadcrumbs %}{% endblock %}
+
         <div class="row">
 
             <aside class="sidebar col-sm-4 col-md-3">
@@ -15,7 +15,7 @@ main content area to split it into a sidebar and a content block
                 {% block column_left_extra %}{% endblock %}
             </aside>
 
-            <div class="col-sm-8 col-md-9">
+            <div class="">
                 {% block header %}
                 <div class="page-header">
                     <h1>{% block headertext %}{% endblock %}</h1>
@@ -30,5 +30,6 @@ main content area to split it into a sidebar and a content block
 
         </div><!-- /row -->
     </div><!-- /page_inner -->
+
 </div><!-- /container -->
 {% endblock %}

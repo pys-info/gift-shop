@@ -4,7 +4,7 @@
 {% load reviews_tags %}
 
 {% block product %}
-    <article class="product_pod">
+    <article class="card p-4" >
         {% block product_image %}
             <div class="image_container w-100">
                 {% with image=product.primary_image %}
@@ -40,7 +40,7 @@
             <div class="product_price w-100">
                 {% include "oscar/catalogue/partials/stock_record.html" %}
                 {% if not product.is_parent and not product.has_options %}
-                    {% include "oscar/catalogue/partials/add_to_basket_form_compact.html" %}
+                   {% include "oscar/catalogue/partials/add_to_cart.html" %}
                 {% endif %}
             </div>
         {% endblock %}
