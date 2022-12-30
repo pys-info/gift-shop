@@ -1,6 +1,24 @@
 /* custom css /
 
 / end custom css */
+
+/* load more css start */
+.product-lm {
+            display: none;
+        }
+
+        .cate-lm {
+            display: none;
+        }
+
+        .noContent {
+            color: #000 !important;
+            background-color: transparent !important;
+            pointer-events: none;
+        }
+ /* load more css end  */
+
+ /* carousel css start */
 .owl-theme .owl-dots .owl-dot span {
     display: none;
 }
@@ -31,7 +49,7 @@ width:80%
 width:20px !important;
 }
 
-
+/* carousel css end */
 
 .slick-slide{height: 78% !important;}
 

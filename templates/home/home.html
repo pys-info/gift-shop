@@ -6,31 +6,10 @@
 {% load i18n %}
 {% block content %}
 
-<head>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <style>
-        *,
-        body {
-            margin: 0;
-            padding: 0;
-        }
 
-        .product-lm {
-            display: none;
-        }
 
-        .cate-lm {
-            display: none;
-        }
 
-        .noContent {
-            color: #000 !important;
-            background-color: transparent !important;
-            pointer-events: none;
-        }
-    </style>
-</head>
 
 <!-- Slider main container Start -->
 
@@ -713,8 +692,8 @@
             </div>
         </div>
         <!-- Product Tab End -->
-        <div class="row g-0 justify-content-center learts-mt-50">
-            <a href="#" id="loadMore" class="btn p-0"><i class="ti-plus"></i> load more ...</a>
+        <div class="text-center mt-5 pt-5">
+            <a href="#" id="loadMore" class="btn btn-outline-info p-2"><i class="t"></i> load more products...</a>
         </div>
 
     </div>
@@ -1109,6 +1088,8 @@
     </div>
 </div>
 
+{% block pages_scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script>
 
     $(document).ready(function () {
@@ -1117,7 +1098,7 @@
             e.preventDefault();
             $(".product-lm:hidden").slice(0, 4).slideDown();
             if ($(".product-lm:hidden").length == 0) {
-                $("#loadMore").text("No Content").addClass("noContent");
+                $("#loadMore").text("No More Products ").addClass("noContent");
             }
         });
 
@@ -1129,7 +1110,7 @@
             e.preventDefault();
             $(".cate-lm:hidden").slice(0, 4).slideDown();
             if ($(".cate-lm:hidden").length == 0) {
-                $("#cateloadMore").text("No Content").addClass("noContent");
+                $("#cateloadMore").text("No More Categories").addClass("noContent");
             }
         });
 
@@ -1137,4 +1118,6 @@
 
 
 </script>
+{% endblock %}
+
 {% endblock %}
