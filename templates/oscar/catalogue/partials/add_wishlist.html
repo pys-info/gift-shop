@@ -1,0 +1,5 @@
+<form action="{% url 'customer:wishlists-add-product' product_pk=product.pk %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-icon btn-outline-body btn-hover-dark hintT-top"
+                                data-hint="Add to Wishlist"><i class="fa fa-heart"></i></button>
+ </form>

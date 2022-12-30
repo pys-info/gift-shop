@@ -1,0 +1,30 @@
+{% load history_tags %}
+{% load currency_filters %}
+{% load reviews_tags %}
+{% load product_tags %}
+{% load display_tags %}
+{% load i18n %}
+{% load purchase_info_tags %}
+{% load i18n %}
+<div class="page-title-section section">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <div class="page-title">
+                      <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ homepage_url }}">{% trans "Home" %}</a></li>
+                            {% with category=product.get_categories.first %}
+                            {% for c in category.get_ancestors_and_self %}
+                                <li class="breadcrumb-item"><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+                            {% endfor %}
+                            <li class="breadcrumb-item active" aria-current="page">{{ product.get_title }}</li>
+
+                            {% endwith %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

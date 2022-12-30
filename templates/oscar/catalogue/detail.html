@@ -9,34 +9,11 @@
 {% load purchase_info_tags %}
 
 {% block title %}
-    {{ product.get_meta_title }} | {{ block.super }}
-{% endblock %}
-
-{% block description %}
-    {{ product.get_meta_description }}
+    {{ product.get_title  }} | {{ block.super }}
 {% endblock %}
 
 {% block breadcrumbs %}
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ homepage_url }}">{% trans "Home" %}</a></li>
-            {% with category=product.get_categories.first %}
-                {% for c in category.get_ancestors_and_self %}
-                    <li class="breadcrumb-item"><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
-                {% endfor %}
-                <li class="breadcrumb-item active" aria-current="page">{{ product.get_title }}</li>
-
-                {% get_back_button as backbutton %}
-                    {% if backbutton %}
-                        <li class="float-right">
-                            <a href="{{ backbutton.url }}">
-                                <i class="fas fa-arrow-left"></i> {{ backbutton.title }}
-                            </a>
-                        </li>
-                    {% endif %}
-            {% endwith %}
-        </ol>
-    </nav>
+{% include "oscar/partials/breadcrumb.html" %}
 {% endblock %}
 
 {% block header %}
@@ -44,167 +21,170 @@
 
 {% block content %}
 
-<article class="product_page"><!-- Start of product page -->
-
-    <div class="row">
-
-        {% block product_gallery %}
-        <div class="col-sm-6">
+<!-- Single Products Section Start -->
+    <div class="section section-padding border-bottom">
+        <div class="container">
+            <div class="row learts-mb-n40">
             {% include "oscar/catalogue/partials/gallery.html" %}
-        </div>
-        {% endblock %}
 
-        {% block product_main %}
-        <div class="col-sm-6 product_main">
-            {% comment %}
-                This is a bit clunky here.  Better to have some kind of JS-driven dashboard menu that
-                pops out when clicked.  A bit like the Django-Debug-Toolbar button
-            {% endcomment %}
-            {% if user.is_staff %}
-                <a class="float-right d-none d-md-block" href="{% url 'dashboard:catalogue-product' pk=product.id %}">
-                    <small><i class="fas fa-pencil-alt"></i> {% trans "Edit this product" %}</small>
-                </a>
-            {% endif %}
-            <h1>{{ product.get_title }}</h1>
-
-            {% block product_stock_record %}
-                {% include "oscar/catalogue/partials/stock_record.html" with verbose=1 %}
-            {% endblock %}
-
-            {% iffeature "reviews" %}
-                {% include "oscar/catalogue/reviews/partials/review_stars.html" %}
-            {% endiffeature %}
-
-            <hr/>
-
-            {% if not product.is_parent %}
-                {% block product_basket_form %}
-                    {% include "oscar/catalogue/partials/add_to_basket_form.html" %}
-                {% endblock %}
-            {% else %}
-                {% block variants %}
-                    <h2>{% trans 'Variants:' %}</h2>
-                    {% for child in product.children.public %}
-                        {% purchase_info_for_product request child as child_session %}
-                        {% if child_session.availability.is_available_to_buy %}
-                            <a href="{{ child.get_absolute_url }}">{{ child.get_title }}</a><br>
+                <!-- Product Summery Start -->
+                <div class="col-lg-6 col-12 learts-mb-40">
+                    <div class="product-summery">
+                      <div class="rating">
+                           {% include "oscar/catalogue/reviews/partials/review_stars.html" %}
+                        </div>
+                        <h3 class="product-title">{{ product.get_title }}</h3>
+                      {% block product_stock_record %}
+                        {% include "oscar/catalogue/partials/stock_record.html" with verbose=1 %}
+                      {% endblock %}
+                        {% block product_description %}
+                        {% if product.description %}
+                        <div class="product-description">
+<!--                          <h6>{% trans "Product Description" %}</h6>-->
+                            <p>{{ product.description|safe }}</p>
+                        </div>
                         {% endif %}
-                    {% endfor %}
-                {% endblock %}
-            {% endif %}
-        </div><!-- /col-sm-6 -->
-        {% endblock %}
+                        {% endblock %}
+                      <div class="product-variations">
+                            <table>
+                                <tbody>
+                                {% for av in product.get_attribute_values %}
+                                    <tr>
+                                        <td class="label"><span>{{ av.attribute.name }}</span></td>
+                                        <td class="value">
+                                            <div class="product-sizes">
+                                                <a href="#">{{ av.value_as_html }}</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
 
-    </div><!-- /row -->
+                                </tbody>
+                            </table>
+                      </div>
+                        <div class="product-buttons">
+                          {% include "oscar/catalogue/partials/add_wishlist.html" %}
+                          {% include "oscar/catalogue/partials/add_to_cart.html" %}
+                        </div>
 
-    {% block product_description %}
-        {% if product.description %}
-        <div id="product_description" class="sub-header">
-            <h2>{% trans "Product Description" %}</h2>
+                        <div class="product-meta">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="label"><span>{% trans "UPC" %}</span></td>
+                                        <td class="value">{{ product.upc }}</td>
+                                    </tr>
+                                    <tr>
+                                      {% with category=product.categories.all.0 %}
+
+                                        <td class="label"><span>Category</span></td>
+                                        <td class="value">
+                                            <ul class="product-category">
+                                              {% for c in category.get_ancestors_and_self %}
+                                                <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+                                              {% endfor %}
+                                            </ul>
+                                        </td>
+                                      {% endwith %}
+                                    </tr>
+                                    <tr>
+                                        <td class="label"><span>{{ product.get_meta_title }}</span></td>
+                                        <td class="value">
+                                            <ul class="product-tags">
+                                                <li>{{ product.get_meta_description }}</li>
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label"><span>Share on</span></td>
+                                        <td class="va">
+                                            <div class="product-share">
+                                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                                                <a href="#"><i class="fab fa-pinterest"></i></a>
+                                                <a href="#"><i class="fa fa-envelope"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Summery End -->
+
+            </div>
         </div>
-        <p>{{ product.description|safe }}</p>
-        {% endif %}
-    {% endblock %}
 
-    {% block product_info %}
-    <div class="sub-header">
-        <h2>{% trans "Product Information" %}</h2>
     </div>
-    <table class="table table-striped">
-        {% if product.upc %}
-        <tr>
-            <th>{% trans "UPC" %}</th><td>{{ product.upc }}</td>
-        </tr>
-        {% endif %}
-        <tr>
-            <th>{% trans "Product Type" %}</th><td>{{ product.get_product_class.name }}</td>
-        </tr>
+    <!-- Single Products Section End -->
 
-        {% purchase_info_for_product request product as session %}
-        {% if session.price.exists %}
-            <tr>
-                <th>{% trans "Price (excl. tax)" %}</th><td>{{ session.price.excl_tax|currency:session.price.currency }}</td>
-            </tr>
-            {% if session.price.is_tax_known %}
-                <tr>
-                    <th>{% trans "Price (incl. tax)" %}</th><td>{{ session.price.incl_tax|currency:session.price.currency }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans "Tax" %}</th><td>{{ session.price.tax|currency:session.price.currency }}</td>
-                </tr>
-            {% endif %}
-            <tr>
-                <th>{% trans "Availability" %}</th>
-                <td>{{ session.availability.message }}</td>
-            </tr>
-        {% endif %}
-        {% for av in product.get_attribute_values %}
-            <tr>
-                <th>{{ av.attribute.name }}</th>
-                <td>{{ av.value_as_html }}</td>
-            </tr>
-        {% endfor %}
-        {% iffeature "reviews" %}
-            <tr>
-                <th>{% trans "Number of reviews" %}</th>
-                <td>{{ product.num_approved_reviews }}</td>
-            </tr>
-        {% endiffeature %}
-    </table>
-    {% endblock %}
+    <!-- Single Products Information Section Start -->
+    <div class="section section-padding border-bottom">
+        <div class="container">
 
-    {% iffeature "reviews" %}
-        {% block product_review %}
-        <section>
-            <div id="reviews" class="sub-header">
-                {% if product.num_approved_reviews > 3 %}
-                    <a href="{% url 'catalogue:reviews-list' product_slug=product.slug product_pk=product.id %}" class="btn float-right">{% trans "See all reviews" %}</a>
-                {% endif %}
-                <h2>{% trans "Customer Reviews" %}</h2>
-            </div>
-
-            {% if product.num_approved_reviews == 0 %}
-                <p>
-                    {% if product|is_review_permitted:user %}
-                        {% url 'catalogue:reviews-add' product_slug=product.slug product_pk=product.id as add_review_url %}
-                            {% blocktrans %}This product does not have any reviews yet -
-                            <a href="{{ add_review_url }}#addreview">be the first to write one</a>.
-                        {% endblocktrans %}
-                    {% else %}
-                        {% trans "This product does not have any reviews yet" %}.
-                    {% endif %}
-                </p>
-            {% else %}
-                <ol class="list-unstyled review-list">
-                    {% for review in product.reviews.approved.all|slice:":3" %}
-                        <li>
-                        {% include 'oscar/catalogue/partials/review.html' %}
-                        </li>
-                    {% endfor %}
-                </ol>
-            {% endif %}
-        </section>
-        {% endblock product_review %}
-    {% endiffeature %}
-
-    {% with recommended_products=product.sorted_recommended_products|slice:":6" %}
-        {% if recommended_products %}
-            <div class="sub-header">
-                <h2>{% trans "Recommended items" %}</h2>
-            </div>
-            <ul class="row list-unstyled mx-0">
-                {% for product in recommended_products %}
-                <li class="col-sm-4 col-md-3 col-lg-3">
-                    {% render_product product %}
-                </li>
-                {% endfor %}
+            <ul class="nav product-info-tab-list">
+                <li><a class="active" data-bs-toggle="tab" href="#tab-description">Description</a></li>
+                <li><a data-bs-toggle="tab" href="#tab-pwb_tab">Brand</a></li>
+                <li><a data-bs-toggle="tab" href="#tab-additional_information">Additional information</a></li>
+                <li><a data-bs-toggle="tab" href="#tab-reviews">Reviews ({{ product.num_approved_reviews }})</a></li>
             </ul>
-        {% endif %}
-    {% endwith %}
+            <div class="tab-content product-infor-tab-content">
+                <div class="tab-pane fade show active" id="tab-description">
+                    <div class="row">
+                        <div class="col-lg-10 col-12 mx-auto">
+                            <p>{{ product.description|safe }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tab-pwb_tab">
+                    <div class="row learts-mb-n30">
 
-    {% recently_viewed_products current_product=product %}
+                        <div class="col-12 learts-mb-30">
+                            <div class="row learts-mb-n10">
+                                <div class="col-lg-2 col-md-3 col-12 learts-mb-10"><img
+                                        src="assets/images/brands/brand-8.webp" alt=""></div>
+                                <div class="col learts-mb-10">
+                                    <p>Prior to Houdini, there have been many clothing brands that achieved such a
+                                        roaring success. However, there’s no other brand that can obtain such a precious
+                                        position like us. We have successfully built our site to make more people know
+                                        about our products as well as our motto. We’ve been the inspiration for many
+                                        other small and medium-sized businesses.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tab-additional_information">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-10 col-12 mx-auto">
+                            {% include "oscar/catalogue/partials/product_variations.html" %}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tab-reviews">
 
-</article><!-- End of product page -->
+                {% include "oscar/catalogue/reviews/review_section.html" %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Single Products Information Section End -->
+
+<section style="width: max-content;" class="p-5">
+
+  {% block product_review %}
+
+  {% endblock product_review %}
+</section>
+
+<section>
+  {% include "oscar/catalogue/partials/product_recommended.html" %}
+
+</section>
 {% endblock content %}
 
 {% block extrascripts %}

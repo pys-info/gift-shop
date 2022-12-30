@@ -1,0 +1,17 @@
+{% load basket_tags %}
+{% load i18n %}
+{% load purchase_info_tags %}
+
+{% purchase_info_for_product request product as session %}
+{% if session.availability.is_available_to_buy %}
+<form action="{% url 'basket:add' pk=product.pk  %}" method="post">
+                              {% csrf_token %}
+                              <input type="hidden" name="quantity" value="1" id="id_quantity">
+                            <button type="submit" class="btn btn-dark btn-outline-hover-dark" data-loading-text="{% trans 'Adding...' %}"><i class="fa fa-shopping-cart"></i>
+                                Add to Cart</button>
+
+                            </form>
+
+{% else %}
+    <span class="btn btn-dark btn-outline-hover-dark disabled">{% trans "Add to basket" %}</span>
+{% endif %}

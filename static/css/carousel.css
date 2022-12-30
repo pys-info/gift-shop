@@ -1,0 +1,30 @@
+.owl-theme .owl-dots .owl-dot span {
+    display: none;
+}
+.owl-next{
+position:absolute; border-radius:50%;top:calc(30% - 20px);
+font-size: 35px !important;
+right:-15px;
+}
+.owl-prev{
+position:absolute; border-radius:50%;top:calc(30% - 20px);
+font-size: 35px !important;
+left:-38px;
+}
+.owl-theme .owl-nav [class*=owl-]:hover {
+background:none;
+color:black;
+}
+.owl-carousel .owl-item img {
+width:80%
+}
+.item {
+  color: white;
+  font-size: 30px;
+
+  padding: 0px;
+}
+.owl-item active{
+width:20px !important;
+}
+
