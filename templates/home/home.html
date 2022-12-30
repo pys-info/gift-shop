@@ -6,59 +6,27 @@
   <div class="section">
       <div class="container">
           <div class="home4-slider swiper-container swiper-container-initialized swiper-container-horizontal">
-              <div class="swiper-wrapper" style="transform: translate3d(-6850px, 0px, 0px); transition-duration: 0ms;"><div class="home4-slide-item swiper-slide swiper-slide-duplicate" data-swiper-autoplay="5000" data-swiper-slide-index="1" style="width: 1170px; margin-right: 200px;">
-                      <div class="home4-slide-image"><img src="{% static 'images/slide-1.webp' %}" alt="Home 4 Slider Image"></div>
-                      <div class="home4-slide-content">
-                          <span class="category">HOME DECOR</span>
-                          <h2 class="title">Homemade Creative Food<br> Cutting Board</h2>
-                          <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>
+              <div class="swiper-wrapper" style="transform: translate3d(-6850px, 0px, 0px); transition-duration: 0ms;">
+               {% for sl in slider %}
+                <div class="home4-slide-item swiper-slide swiper-slide-duplicate-active" data-swiper-autoplay="5000" data-swiper-slide-index="0" style="width: 1170px; margin-right: 200px;">
+                      <div class="home4-slide-image">
+                        <img src="{{sl.image.url}}" alt="Home 4 Slider Image">
                       </div>
-                  </div><div class="home4-slide-item swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev" data-swiper-autoplay="5000" data-swiper-slide-index="2" style="width: 1170px; margin-right: 200px;">
-                      <div class="home4-slide-image"><img src="{% static 'images/slide-1.webp' %}" alt="Home 4 Slider Image"></div>
                       <div class="home4-slide-content">
-                          <span class="category">HOME DECOR</span>
-                          <h2 class="title">Handmade Wooden<br> Rounded Bowl</h2>
-                          <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>
+                          <span class="category">{{sl.title|upper}}</span>
+                          <h2 class="title">{{sl.sub_title}}</h2>
+                          <div class="link">
+                            <a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a>
+                          </div>
                       </div>
-                  </div>
-                  <div class="home4-slide-item swiper-slide swiper-slide-duplicate-active" data-swiper-autoplay="5000" data-swiper-slide-index="0" style="width: 1170px; margin-right: 200px;">
-                      <div class="home4-slide-image"><img src="{% static 'images/slide-1.webp' %}" alt="Home 4 Slider Image"></div>
-                      <div class="home4-slide-content">
-                          <span class="category">HOME DECOR</span>
-                          <h2 class="title">Monamii Jade-green<br> Wall Clock</h2>
-                          <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>
-                      </div>
-                  </div>
-                  <div class="home4-slide-item swiper-slide swiper-slide-duplicate-next" data-swiper-autoplay="5000" data-swiper-slide-index="1" style="width: 1170px; margin-right: 200px;">
-                      <div class="home4-slide-image"><img src="{% static 'images/slide-1.webp' %}" alt="Home 4 Slider Image"></div>
-                      <div class="home4-slide-content">
-                          <span class="category">HOME DECOR</span>
-                          <h2 class="title">Homemade Creative Food<br> Cutting Board</h2>
-                          <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>
-                      </div>
-                  </div>
-                  <div class="home4-slide-item swiper-slide swiper-slide-prev" data-swiper-autoplay="5000" data-swiper-slide-index="2" style="width: 1170px; margin-right: 200px;">
-                      <div class="home4-slide-image"><img src="{% static 'images/slide-1.webp' %}" alt="Home 4 Slider Image"></div>
-                      <div class="home4-slide-content">
-                          <span class="category">HOME DECOR</span>
-                          <h2 class="title">Handmade Wooden<br> Rounded Bowl</h2>
-                          <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>
-                      </div>
-                  </div>
+                </div>
+                {% endfor %}
+
+
               <div class="home4-slide-item swiper-slide swiper-slide-duplicate swiper-slide-active" data-swiper-autoplay="5000" data-swiper-slide-index="0" style="width: 1170px; margin-right: 200px;">
-                      <div class="home4-slide-image"><img src="{% static 'images/slide-1.webp' %}" alt="Home 4 Slider Image"></div>
-                      <div class="home4-slide-content">
-                          <span class="category">HOME DECOR</span>
-                          <h2 class="title">Monamii Jade-green<br> Wall Clock</h2>
-                          <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>
-                      </div>
+
                   </div><div class="home4-slide-item swiper-slide swiper-slide-duplicate swiper-slide-next" data-swiper-autoplay="5000" data-swiper-slide-index="1" style="width: 1170px; margin-right: 200px;">
-                      <div class="home4-slide-image"><img src="{% static 'images/slide-1.webp' %}" alt="Home 4 Slider Image"></div>
-                      <div class="home4-slide-content">
-                          <span class="category">HOME DECOR</span>
-                          <h2 class="title">Homemade Creative Food<br> Cutting Board</h2>
-                          <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>
-                      </div>
+
                   </div></div>
               <div class="home4-slider-prev swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"><i class="ti-angle-left"></i></div>
               <div class="home4-slider-next swiper-button-next" tabindex="0" role="button" aria-label="Next slide"><i class="ti-angle-right"></i></div>
