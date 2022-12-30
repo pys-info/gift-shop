@@ -2912,6 +2912,9 @@ body.offside-header-left {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+
+  margin-right: 86px;
+
 }
 .site-main-menu > ul {
   font-size: 16px;
