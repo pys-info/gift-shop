@@ -1,0 +1,22 @@
+{% load currency_filters %}
+{% load i18n %}
+{% load purchase_info_tags %}
+<style>
+  .price_color {
+    font-size: 1rem;
+    color: #28a745;
+    font-weight: bold;
+    }
+
+</style>
+{% purchase_info_for_product request product as session %}
+
+{% if session.price.exists %}
+    {% if session.price.excl_tax == 0 %}
+        <p class="price_color">{% trans "Free" %}</p>
+    {% else %}
+        <p class="price_color">{{ session.price.excl_tax|currency:session.price.currency }}</p>
+    {% endif %}
+{% else %}
+    <p class="price_color">&nbsp;</p>
+{% endif %}
