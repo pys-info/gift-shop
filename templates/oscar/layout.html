@@ -1,8 +1,12 @@
 {% extends "oscar/base.html" %}
 {% load static %}
-{% block Custom_links %}
+{% block Css_cdn_links %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+{% endblock %}
+
+{% block Custom_css_links %}
         <link rel="stylesheet" href="{% static 'css/swiper.css' %}" />
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
@@ -16,8 +20,9 @@
         <link rel="stylesheet" href="{% static 'css/slick.css' %}" />
         <link rel="stylesheet" href="{% static 'css/style.min.css' %}" />
         <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}" />
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="{% static 'css/carousel.css' %}" />
 {% endblock %}
 
 {% block styles %}
@@ -58,7 +63,15 @@
 
     {% include "oscar/partials/footer.html" %}
 {% endblock %}
+{% block cdn_scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="{% static 'oscar/js/jquery/jquery.min.js' %}"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.3.0/js/swiper.js" integrity="sha512-oF0y5ppUsv6Rxhw/vdoO5p9gVeiqQvZrPvrkeLcISbBmZ2ZEEwh7brA4UqI4ql5W1z3769qgJuA5C2qo9kkl+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
+{% endblock %}
 {# Local scripts #}
 {% block scripts %}
     {{ block.super }}
@@ -67,10 +80,33 @@
     <!-- Oscar -->
     <script src="{% static 'oscar/js/oscar/ui.js' %}"></script>
 
+        <script src="{% static 'js/images_loaded.js' %}"></script>
+        <script src="{% static 'js/instafeed.js' %}"></script>
+        <script src="{% static 'js/ion.rangeSlider.js' %}"></script>
+        <script src="{% static 'js/isotop.js' %}"></script>
+        <script src="{% static 'js/jquery.ajaxchimp.js' %}"></script>
+        <script src="{% static 'js/jquery.countdown.js' %}"></script>
+        <script src="{% static 'js/jquery.magnific.js' %}"></script>
+        <script src="{% static 'js/jquery.matchHeight.js' %}"></script>
+        <script src="{% static 'js/jquery.scrollUp.js' %}"></script>
+        <script src="{% static 'js/jquery.sticky-sidebar.js' %}"></script>
+        <script src="{% static 'js/jquery.zoom.js' %}"></script>
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/mo.js' %}"></script>
+        <script src="{% static 'js/nice-select.js' %}"></script>
+        <script src="{% static 'js/perfect-scrollbar.js' %}"></script>
+        <script src="{% static 'js/photoswipe.js' %}"></script>
+        <script src="{% static 'js/photoswipe-ui-default.js' %}"></script>
+        <script src="{% static 'js/product360.js' %}"></script>
+        <script src="{% static 'js/resizeSensor.js' %}"></script>
+        <script src="{% static 'js/scrollax.js' %}"></script>
+        <script src="{% static 'js/select2.js' %}"></script>
+        <script src="{% static 'js/slick.js' %}"></script>
+        <script src="{% static 'js/swiper.js' %}"></script>
+        <script src="{% static 'js/index.js' %}"></script>
+        <script src="{% static 'js/carousel.js' %}"></script>
+{% endblock %}
 
-{% endblock %}
-{% block carousel_scripts %}
-{% endblock %}
 {% block pages_scripts %} {% endblock %}
 
 {% block extrascripts %}

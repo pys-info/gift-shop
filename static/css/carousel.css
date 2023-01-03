@@ -1,13 +1,23 @@
 .owl-theme .owl-dots .owl-dot span {
     display: none;
 }
-.owl-next{
+.product-cs .owl-next{
 position:absolute; border-radius:50%;top:calc(30% - 20px);
 font-size: 35px !important;
 right:-15px;
 }
-.owl-prev{
+.product-cs .owl-prev{
 position:absolute; border-radius:50%;top:calc(30% - 20px);
+font-size: 35px !important;
+left:-38px;
+}
+.category-cs .owl-next{
+position:absolute; border-radius:50%;top:calc(30% - -57px);
+font-size: 35px !important;
+right:-35px;
+}
+.category-cs .owl-prev{
+position:absolute; border-radius:50%;top:calc(30%  - -57px);
 font-size: 35px !important;
 left:-38px;
 }
