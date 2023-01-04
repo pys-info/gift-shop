@@ -4,13 +4,8 @@
 {% load category_tags %}
 {% load product_tags %}
 {% load i18n %}
+
 {% block content %}
-
-
-
-
-
-
 <!-- Slider main container Start -->
 
 <div class="section">
@@ -94,22 +89,30 @@
     </div>
     <div class="container">
         <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 learts-mb-n40">
+          <div class="owl-carousel owl-theme text-center px-3 category-cs">
             {% for category in categorys %}
-            <div class="col learts-mb-40 cate-lm">
+
+                <div class="item ">
+            <div class="col learts-mb-40">
                 <div class="category-banner4">
                     <a href="{{category.get_absolute_url}}" class="inner">
-                        <div class="image"><img src="{{category.image.url}}" alt=""></div>
+                      {% if category.image %}
+                        <div class="image w-100"><img src="{{category.image.url}}" alt=""></div>
+                      {% else %}
+                      <div class="image"><img src="{% static 'images/demo_cate.jpg' %}" alt=""></div>
+                      {% endif %}
                         <div class="content" data-bg-color="#f4ede7" style="background-color: rgb(244, 237, 231);">
                             <h3 class="title">{{category.name}}</h3>
                         </div>
                     </a>
                 </div>
             </div>
+                </div>
             {% endfor %}
+                </div>
+
         </div>
-        <div class="row g-0 justify-content-center learts-mt-50">
-            <a href="#" id="cateloadMore" class="btn p-0"><i class="ti-plus"></i> load more ...</a>
-        </div>
+
     </div>
 </div>
 {% endif %}
@@ -1104,20 +1107,9 @@
 
     })
 
-    $(document).ready(function () {
-        $(".cate-lm").slice(0, 4).show();
-        $("#cateloadMore").on("click", function (e) {
-            e.preventDefault();
-            $(".cate-lm:hidden").slice(0, 4).slideDown();
-            if ($(".cate-lm:hidden").length == 0) {
-                $("#cateloadMore").text("No More Categories").addClass("noContent");
-            }
-        });
-
-    })
-
-
 </script>
+
+
 {% endblock %}
 
 {% endblock %}
